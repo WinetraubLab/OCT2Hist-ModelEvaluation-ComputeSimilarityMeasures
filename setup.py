@@ -16,6 +16,7 @@ NAME = ' OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures'
 DESCRIPTION = 'Evaluate how close is the model to ground truth by evaluating similarity measures'
 URL = 'https://github.com/WinetraubLab/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures'
 AUTHORS = 'Yonatan Winetraub, Patricio Gonzalez'
+EMAIL = 'patricio.ilan.gonzalez2001@gmail.com'
 REQUIRES_PYTHON = '>=3.6.0'
 VERSION = '0.1.0'
 

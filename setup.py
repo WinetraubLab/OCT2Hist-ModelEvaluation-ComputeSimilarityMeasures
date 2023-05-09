@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='Compute Similarity Measures',
+    name='OCT2Hist-ModelEvaluation-ComputeSimilaritySimilarityMeasures',
     url='https://github.com/WinetraubLab/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures',
     author='me',
     author_email='patricio.ilan.gonzalez2001@gmail.com',

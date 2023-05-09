@@ -5,7 +5,7 @@ setup(
     url='https://github.com/WinetraubLab/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures',
     author='me',
     author_email='patricio.ilan.gonzalez2001@gmail.com',
-    packages='oct',
+    packages=['numpy'],
     install_requires=["numpy"],
     version='0.1.0',
     description='description',

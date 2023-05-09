@@ -139,6 +139,6 @@ setup(
     description = 'Evaluate how close is the model to ground truth by evaluating similarity measures',
     packages = find_packages(),
     install_requires = [
-        'git+https://github.com/WinetraubLab/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures'
+        'git+https://github.com/WinetraubLab/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures.git'
     ]
 )

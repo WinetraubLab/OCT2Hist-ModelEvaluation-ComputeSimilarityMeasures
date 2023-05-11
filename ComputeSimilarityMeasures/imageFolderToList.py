@@ -16,8 +16,8 @@ Example:
 '''
 
 class imageFolderToList:
-  def __init__(self, path):
-    self.path = path
+  def __init__(self, images_path):
+    self.images_path = images_path
 
   def imageFolderToList(self):
     # Make list of images

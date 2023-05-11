@@ -16,10 +16,7 @@ Example:
 '''
 
 class imageFolderToList:
-  def __init__(self, images_path):
-    self.images_path = images_path
-
-  def imageFolderToList(self):
+  def __call__(self, images_path):
     # Make list of images
     images_files = sorted(os.listdir(images_path))
 

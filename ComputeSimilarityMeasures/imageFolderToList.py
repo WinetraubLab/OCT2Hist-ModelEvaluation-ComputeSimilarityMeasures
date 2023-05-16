@@ -17,11 +17,11 @@ Example:
 
 class imageFolderToList:
   def __init__(self, path):
-    self.path = images_path
+    self.path = path
 
   def __call__(self):
     # Make list of images
-    images_files = sorted(os.listdir(self.images_path))
+    images_files = sorted(os.listdir(self.path))
 
     # Throws exception if length of images array is not even
     if len(images_files) % 2 != 0:

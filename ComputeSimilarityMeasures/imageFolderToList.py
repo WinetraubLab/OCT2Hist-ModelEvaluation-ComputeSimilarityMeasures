@@ -19,7 +19,7 @@ class imageFolderToList:
   def __init__(self, path):
     self.path = path
 
-  def __call__(self):
+  def folderToList(self):
     # Make list of images
     images_files = sorted(os.listdir(self.path))
 

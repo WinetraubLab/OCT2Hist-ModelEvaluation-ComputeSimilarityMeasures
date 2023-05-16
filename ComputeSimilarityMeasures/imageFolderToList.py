@@ -16,9 +16,9 @@ Example:
 '''
 
 class imageFolderToList:
-  def __call__(self, images_path):
+  def __call__(self):
     # Make list of images
-    images_files = sorted(os.listdir(images_path))
+    images_files = sorted(os.listdir(self))
 
     # Throws exception if length of images array is not even
     if len(images_files) % 2 != 0:

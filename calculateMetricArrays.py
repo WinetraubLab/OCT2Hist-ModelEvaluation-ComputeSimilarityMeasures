@@ -44,8 +44,8 @@ def calculateMetricArrays(imagePair_list, imageFolder, outputFilePath='/content/
     # Loop that iterates through files list, converts each image to grayscale, calculates metric score, puts score into array, and prints all the pairs' file names and metric scores into a csv file
     for i in imagePair_list:
         # Convert current A and B images to grayscale
-        a_image = np.array(color.rgb2gray(io.imread(args + "/" + i[0])))
-        b_image = np.array(color.rgb2gray(io.imread(args + "/" + i[1])))
+        a_image = np.array(color.rgb2gray(io.imread(imageFolder + "/" + i[0])))
+        b_image = np.array(color.rgb2gray(io.imread(imageFolder + "/" + i[1])))
 
         # Calculate SSIM, round it, and add to array
         scores_ssim.append(round(structural_similarity(a_image, b_image, win_size=255), 3))

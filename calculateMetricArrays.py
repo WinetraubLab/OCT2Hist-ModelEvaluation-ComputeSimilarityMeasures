@@ -11,9 +11,10 @@ import csv
 This function takes list of image pairs, calculates their metric scores and puts them into a csv file and returns vectors of each metric score
 
 Inputs:
-  1. imagePair_list - a nested list of image pairs of a real image file path and a fake image file path
-  2. outputFilePath - the desired path for the csv file to be saved in
-  3. outputFileName - the desired name for the csv file containing image pair names and their metric scores, where no name defaults to file name being 'output.csv'
+  1. pair_list - a nested list of image pairs of a real image file path and a fake image file path
+  2. images_path - a variable containing a string of file path of desired images
+  3. outputFilePath - the desired path for the csv file to be saved in
+  4. outputFileName - the desired name for the csv file containing image pair names and their metric scores, where no name defaults to file name 'output.csv'
 
 Outputs:
   1. scores_ssim - array of SSIM scores
@@ -33,7 +34,7 @@ Outputs:
 
 '''
 
-def calculateMetricArrays(imagePair_list, imageFolder, outputFilePath='/content/drive/output.csv'):
+def calculateMetricArrays(pair_list, images_path, outputFilePath='/content/drive/output.csv'):
     # Metric score lists
     scores_ssim = []
     scores_mse = []
@@ -41,11 +42,12 @@ def calculateMetricArrays(imagePair_list, imageFolder, outputFilePath='/content/
     scores_mae = []
     scores_pcc = []
 
-    # Loop that iterates through files list, converts each image to grayscale, calculates metric score, puts score into array, and prints all the pairs' file names and metric scores into a csv file
-    for i in imagePair_list:
+    # Loop that iterates through files list, converts each image to grayscale, calculates metric score,
+    # puts score into array, and prints all the pairs' file names and metric scores into a csv file
+    for i in pair_list:
         # Convert current A and B images to grayscale
-        a_image = np.array(color.rgb2gray(io.imread(imageFolder + "/" + i[0])))
-        b_image = np.array(color.rgb2gray(io.imread(imageFolder + "/" + i[1])))
+        a_image = np.array(color.rgb2gray(io.imread(images_path + "/" + i[0])))
+        b_image = np.array(color.rgb2gray(io.imread(images_path + "/" + i[1])))
 
         # Calculate SSIM, round it, and add to array
         scores_ssim.append(round(structural_similarity(a_image, b_image, win_size=255), 3))
@@ -67,9 +69,9 @@ def calculateMetricArrays(imagePair_list, imageFolder, outputFilePath='/content/
         metrics_csvwriter = csv.writer(csvfile)
         metrics_csvwriter.writerow(["Real Image", "Fake Image", "SSIM", "MSE", "PSNR", "MAE", "PCC"])
 
-        for i in range(len(imagePair_list)):
+        for i in range(len(pair_list)):
             metrics_csvwriter.writerow(
-                [imagePair_list[i][0], imagePair_list[i][1], scores_ssim[i], scores_mse[i], scores_psnr[i],
+                [pair_list[i][0], pair_list[i][1], scores_ssim[i], scores_mse[i], scores_psnr[i],
                  scores_mae[i], scores_pcc[i]])
 
     return scores_ssim, scores_mse, scores_psnr, scores_mae, scores_pcc

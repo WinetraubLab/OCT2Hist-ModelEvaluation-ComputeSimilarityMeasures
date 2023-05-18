@@ -8,7 +8,7 @@ Inputs:
   4. mae - array of MAE scores
   5. pcc - array of PCC scores
 
-Output: Prints score averages onto screen
+Output: Prints score averages onto screen, rounded to three significant figures
 '''
 
 def printMetricAverages (ssim, mse, psnr, mae, pcc):

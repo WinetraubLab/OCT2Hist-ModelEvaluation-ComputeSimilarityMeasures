@@ -1,18 +1,18 @@
 import os
 
 '''
-This function lists the image_path folder and creates a nested image pair list
+This function lists the image_path folder and creates a nested image file path pair list
 for the real and fake images
 
 Inputs:
-  images_path - a variable containing a string of filepath of desired images
+  images_path - a variable containing a string of file path of desired images
 
 Output:
-  pair_list - a nested list of image pair of a real image file path and a fake image file path
+  pair_list - a nested list of image file path pairs, one a real image and the other a fake image
 
 Example:
-  imagePair_list[i][0] - real image path
-  imagePair_list[i][1] - fake image path
+  pair_list[i][0] - real image path
+  pair_list[i][1] - fake image path
 '''
 
 

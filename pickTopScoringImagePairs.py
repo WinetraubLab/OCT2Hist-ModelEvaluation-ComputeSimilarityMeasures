@@ -10,7 +10,8 @@ Inputs:
   4. mae - array of MAE scores
   5. pcc - array of PCC scores
 
-Outputs: Array of top-scoring image pair IDs
+Outputs: 
+  1. top_scores - array of top-scoring image pair file paths
 '''
 
 def pickTopScoringImagePairs(ssim, mse, psnr, mae, pcc):
@@ -22,26 +23,26 @@ def pickTopScoringImagePairs(ssim, mse, psnr, mae, pcc):
     best_pcc = np.array(pcc).argsort()[::-1]
 
     # Creates an array of highest-scoring pairs
-    topScores = []
+    top_scores = []
 
     # Adds a pair after checking if it's already there
     for i in range(25):
-        if len(topScores) >= 25:
+        if len(top_scores) >= 25:
             break
         else:
-            if best_ssim[i] not in topScores:
-                topScores.append(best_ssim[i])
+            if best_ssim[i] not in top_scores:
+                top_scores.append(best_ssim[i])
 
-            if best_mse[i] not in topScores:
-                topScores.append(best_mse[i])
+            if best_mse[i] not in top_scores:
+                top_scores.append(best_mse[i])
 
-            if best_psnr[i] not in topScores:
-                topScores.append(best_psnr[i])
+            if best_psnr[i] not in top_scores:
+                top_scores.append(best_psnr[i])
 
-            if best_mae[i] not in topScores:
-                topScores.append(best_mae[i])
+            if best_mae[i] not in top_scores:
+                top_scores.append(best_mae[i])
 
-            if best_pcc[i] not in topScores:
-                topScores.append(best_pcc[i])
+            if best_pcc[i] not in top_scores:
+                top_scores.append(best_pcc[i])
 
-    return topScores
+    return top_scores

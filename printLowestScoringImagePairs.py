@@ -19,7 +19,7 @@ Output: Prints real and fake image to skin, along with their metric scores
 '''
 
 class printLowestScoringImagePairs:
-    def printLowestScoringImagePairs(ssim, mse, psnr, mae, pcc, bottom_list, imagePair_list, amountToPrint):
+    def printLowestScoringImagePairs(ssim, mse, psnr, mae, pcc, bottom_list, images_path, imagePair_list, amountToPrint):
         # Outputs the lowest scoring image pairs
         rows = 2
         columns = 2
@@ -33,7 +33,7 @@ class printLowestScoringImagePairs:
             fig.add_subplot(rows, columns, 1)
 
             # Showing image
-            plt.imshow(cv2.imread(images_folder + "/" + imagePair_list[bottom_list[i]][0]))
+            plt.imshow(cv2.imread(images_path + "/" + imagePair_list[bottom_list[i]][0]))
             plt.axis('off')
             plt.title("Real Image: " + "\n" + imagePair_list[bottom_list[i]][0])
 
@@ -41,7 +41,7 @@ class printLowestScoringImagePairs:
             fig.add_subplot(rows, columns, 2)
 
             # Showing image
-            plt.imshow(cv2.imread(images_folder + "/" + imagePair_list[bottom_list[i]][1]))
+            plt.imshow(cv2.imread(images_path + "/" + imagePair_list[bottom_list[i]][1]))
             plt.axis('off')
             plt.title("Fake Image: " + "\n" + imagePair_list[bottom_list[i]][1])
             plt.show()

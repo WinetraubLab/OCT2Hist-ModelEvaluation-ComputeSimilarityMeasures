@@ -19,6 +19,10 @@ Output:
 '''
 
 def find_tissue_in_oct(model_path, model_type, image):
+    bright_mask = None
+    max_mean_mask = None
+    max_mean = None
+
     # Shows an image's mask overlaid on the original image
     def show_ann(ann):
         ax = plt.gca()
@@ -117,7 +121,10 @@ def find_tissue_in_oct(model_path, model_type, image):
         #                 f"Mask with brightest pixel: {bright_mask}, Mask with highest mean: {max_mean_mask}")
         print(f"Mask with brightest pixel not the same as mask with highest average. "
               f"Mask with brightest pixel: {bright_mask}, Mask with highest mean: {max_mean_mask}")
+
         not_equal_counter += 1
+
+        print("Number of unmatching mask means and brightest pixels: ", not_equal_counter)
 
     elif bright_mask == max_mean_mask:
         tissue_mask = bright_mask
@@ -131,5 +138,6 @@ def find_tissue_in_oct(model_path, model_type, image):
         plt.show()
 
         equal_counter += 1
+        print("Number of matching mask means and brightest pixels: ", equal_counter)
 
         return masks[tissue_mask]["segmentation"]

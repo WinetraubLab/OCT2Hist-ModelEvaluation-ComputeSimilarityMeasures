@@ -124,6 +124,7 @@ def find_tissue_in_oct(model_path, model_type, image):
 
         not_equal_counter += 1
 
+        print("Number of matching mask means and brightest pixels: ", equal_counter)
         print("Number of unmatching mask means and brightest pixels: ", not_equal_counter)
 
     elif bright_mask == max_mean_mask:
@@ -139,5 +140,6 @@ def find_tissue_in_oct(model_path, model_type, image):
 
         equal_counter += 1
         print("Number of matching mask means and brightest pixels: ", equal_counter)
+        print("Number of unmatching mask means and brightest pixels: ", not_equal_counter)
 
         return masks[tissue_mask]["segmentation"]

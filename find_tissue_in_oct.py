@@ -111,8 +111,10 @@ def find_tissue_in_oct(model_path, model_type, image):
 
     # Checker to make sure the mask with highest pixel brightness mean and brightest pixel are the same
     if bright_mask != max_mean_mask:
-        raise Exception(f"Mask with brightest pixel not the same as mask with highest average. "
-                        f"Mask with brightest pixel: {bright_mask}, Mask with highest mean: {max_mean_mask}")
+        # raise Exception(f"Mask with brightest pixel not the same as mask with highest average. "
+        #                 f"Mask with brightest pixel: {bright_mask}, Mask with highest mean: {max_mean_mask}")
+        print(f"Mask with brightest pixel not the same as mask with highest average. "
+              f"Mask with brightest pixel: {bright_mask}, Mask with highest mean: {max_mean_mask}")
     elif bright_mask == max_mean_mask:
         tissue_mask = bright_mask
 

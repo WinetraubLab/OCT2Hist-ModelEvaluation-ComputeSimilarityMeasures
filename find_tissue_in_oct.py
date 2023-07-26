@@ -22,6 +22,7 @@ def find_tissue_in_oct(model_path, model_type, image):
     bright_mask = None
     max_mean_mask = None
     max_mean = None
+    tissue_mask = None
 
     # Shows an image's mask overlaid on the original image
     def show_ann(ann):
@@ -50,7 +51,6 @@ def find_tissue_in_oct(model_path, model_type, image):
     # Opens and shows inputted image from the given path
     image = cv2.imread(image)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    tissue_mask = None
 
     plt.figure(figsize=(10, 10))
     plt.imshow(image)
@@ -121,11 +121,6 @@ def find_tissue_in_oct(model_path, model_type, image):
         print(f"Mask with brightest pixel not the same as mask with highest average. "
               f"Mask with brightest pixel: {bright_mask}, Mask with highest mean: {max_mean_mask}")
 
-        not_equal_counter += 1
-
-        print("Number of matching mask means and brightest pixels: ", equal_counter)
-        print("Number of unmatching mask means and brightest pixels: ", not_equal_counter)
-
     elif bright_mask == max_mean_mask:
         tissue_mask = bright_mask
 
@@ -136,9 +131,5 @@ def find_tissue_in_oct(model_path, model_type, image):
         show_ann(masks[tissue_mask])
         plt.axis('on')
         plt.show()
-
-        equal_counter += 1
-        print("Number of matching mask means and brightest pixels: ", equal_counter)
-        print("Number of unmatching mask means and brightest pixels: ", not_equal_counter)
 
         return masks[tissue_mask]["segmentation"]

@@ -1,7 +1,4 @@
 import numpy as np
-import cv2
-from google.colab.patches import cv2_imshow
-import matplotlib.pyplot as plt
 
 '''
 This function sorts lowest-scoring image pairs using argsort for each metric, adds them to an array, checking if it's not there already, and returns the array

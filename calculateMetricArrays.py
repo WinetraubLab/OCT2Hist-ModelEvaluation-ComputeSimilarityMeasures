@@ -52,7 +52,9 @@ def calculateMetricArrays(real_image_paths, fake_image_paths, mask_image_paths, 
         # Convert current A and B images to grayscale
         a_image = np.array(cv2.cvtColor(io.imread(images_folder_path + "/" + real_image_paths[i]), cv2.COLOR_RGB2GRAY))
         b_image = np.array(cv2.cvtColor(io.imread(images_folder_path + "/" + fake_image_paths[i]), cv2.COLOR_RGB2GRAY))
-        mask_image = np.array(cv2.cvtColor(io.imread(images_folder_path + "/" + mask_image_paths[i]), cv2.COLOR_RGB2GRAY))
+
+        if len(mask_image_paths) != 0:
+            mask_image = np.array(cv2.cvtColor(io.imread(images_folder_path + "/" + mask_image_paths[i]), cv2.COLOR_RGB2GRAY))
 
         # Calculate SSIM, round it, and add to array
         scores_ssim.append(round(structural_similarity(a_image, b_image, win_size=255), 3))

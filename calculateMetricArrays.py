@@ -72,9 +72,9 @@ def calculateMetricArrays(real_image_paths, fake_image_paths, mask_image_paths, 
         metrics_csvwriter = csv.writer(csvfile)
         metrics_csvwriter.writerow(["Real Image", "Fake Image", "SSIM", "MSE", "PSNR", "MAE", "PCC"])
 
-        for i in range(len(pair_list)):
+        for i in range(len(real_image_paths)):
             metrics_csvwriter.writerow(
-                [pair_list[i][0], pair_list[i][1], scores_ssim[i], scores_mse[i], scores_psnr[i],
+                [real_image_paths[i], fake_image_paths[i], scores_ssim[i], scores_mse[i], scores_psnr[i],
                  scores_mae[i], scores_pcc[i]])
 
     return scores_ssim, scores_mse, scores_psnr, scores_mae, scores_pcc

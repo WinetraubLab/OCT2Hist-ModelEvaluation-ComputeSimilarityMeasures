@@ -21,6 +21,8 @@ Example:
 
 def splitImagesInFolderToRealAndFakeLists(images_folder_path):
     # Finds the nth occurrence of a character in a string
+
+    # Function to find the nth occurrence of a specific character, used to divide an image's label
     def find_nth(string, character, n):
         start = string.find(character)
         while start >= 0 and n > 1:
@@ -31,7 +33,7 @@ def splitImagesInFolderToRealAndFakeLists(images_folder_path):
     # Make list of image paths from folder
     images_files = sorted(os.listdir(images_folder_path))
 
-    # Sort images into their respective folders using their suffixes
+    # Create type lists and put images into their respective folders using their suffixes
     real_image_paths = []
     fake_image_paths = []
     mask_image_paths = []
@@ -41,13 +43,13 @@ def splitImagesInFolderToRealAndFakeLists(images_folder_path):
         name_label = i[:underscore - 1]
         type_label = i[underscore:]
 
-        if "mask" in type_label:  # If there's mask
+        if "mask" in type_label:  # If there is "mask"
             mask_image_paths.append(i)
 
-        elif "fake" in type_label:  # If there's more real than fake
+        elif "fake" in type_label:  # If there is "fake"
             fake_image_paths.append(i)
 
-        else:  # if there's more fake or same amount as real
+        else:  # If there is no "mask" or "fake"
             real_image_paths.append(i)
 
     # Check that prefixes are the same

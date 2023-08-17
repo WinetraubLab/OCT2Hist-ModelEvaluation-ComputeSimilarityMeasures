@@ -1,5 +1,5 @@
 import cv2
-from google.colab.patches import cv2_imshow
+# from google.colab.patches import cv2_imshow
 import matplotlib.pyplot as plt
 
 '''
@@ -13,19 +13,19 @@ Inputs:
   5. pcc - array of PCC scores
   6. bottom_list - array of lowest-scoring image pair indexes
   7. images_folder_path - a variable containing a string of file path of desired images
-  1. real_image_paths - a list containing real images
-  2. fake_image_paths - a list containing fake images
-  9. amount_to_print - integer of desired amount of image pairs and their scores to print
+  8. real_image_paths - a list containing real images
+  9. fake_image_paths - a list containing fake images
+  10. amount_to_print - integer of desired amount of image pairs and their scores to print
 
-Output: Prints real and fake image to skin, along with their metric scores
+Output: Prints real and fake image to screen, along with their metric scores
 '''
 
 def printLowestScoringImagePairs(ssim, mse, psnr, mae, pcc, bottom_list, images_folder_path, real_images_paths, fake_images_paths, amount_to_print):
-    # Outputs the lowest scoring image pairs
+    # Outputs the lowest scoring images
     rows = 2
     columns = 2
 
-    print("Highest scorers: \n")
+    print("Lowest scorers: \n")
     for i in range(amount_to_print):
         # Display the lowest scorers
         fig = plt.figure(figsize=(13, 10))
@@ -34,17 +34,17 @@ def printLowestScoringImagePairs(ssim, mse, psnr, mae, pcc, bottom_list, images_
         fig.add_subplot(rows, columns, 1)
 
         # Showing real image
-        plt.imshow(cv2.imread(images_folder_path + "/" + real_images_paths[bottom_list[i]][0]))
+        plt.imshow(cv2.imread(images_folder_path + "/" + real_images_paths[bottom_list[i]]))
         plt.axis('off')
-        plt.title("Real Image: " + "\n" + real_images_paths[bottom_list[i]][0])
+        plt.title("Real Image: " + "\n" + real_images_paths[bottom_list[i]])
 
         # Add subplot at 2nd position
         fig.add_subplot(rows, columns, 2)
 
         # Showing fake image
-        plt.imshow(cv2.imread(images_folder_path + "/" + fake_images_paths[bottom_list[i]][1]))
+        plt.imshow(cv2.imread(images_folder_path + "/" + fake_images_paths[bottom_list[i]]))
         plt.axis('off')
-        plt.title("Fake Image: " + "\n" + fake_images_paths[bottom_list[i]][1])
+        plt.title("Fake Image: " + "\n" + fake_images_paths[bottom_list[i]])
         plt.show()
 
         print("\n")

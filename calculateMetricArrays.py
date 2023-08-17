@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 from skimage import color, io
 from skimage.metrics import structural_similarity
 from skimage.metrics import mean_squared_error
@@ -8,7 +9,7 @@ from scipy.stats import pearsonr
 import csv
 
 '''
-This function takes list of image pairs, calculates their metric scores and puts them into a csv file and returns vectors of each metric score
+This function takes lists of images, calculates their metric scores and puts them and their results into a csv file and returns vectors of each metric score
 
 Inputs:
   1. real_image_paths - a list containing real images
@@ -36,6 +37,7 @@ Outputs:
 
 '''
 
+
 def calculateMetricArrays(real_image_paths, fake_image_paths, mask_image_paths, images_folder_path, outputFilePath='/content/drive/output.csv'):
     # Metric score lists
     scores_ssim = []
@@ -48,9 +50,9 @@ def calculateMetricArrays(real_image_paths, fake_image_paths, mask_image_paths, 
     # puts score into array, and prints all the pairs' file names and metric scores into a csv file
     for i in range(len(real_image_paths)):
         # Convert current A and B images to grayscale
-        a_image = np.array(color.rgb2gray(io.imread(images_folder_path + "/" + real_image_paths[i])))
-        b_image = np.array(color.rgb2gray(io.imread(images_folder_path + "/" + fake_image_paths[i])))
-        mask_image = np.array(color.rgb2gray(io.imread(images_folder_path + "/" + mask_image_paths[i])))
+        a_image = np.array(cv2.cvtColor(io.imread(images_folder_path + "/" + real_image_paths[i]), cv2.COLOR_RGB2GRAY))
+        b_image = np.array(cv2.cvtColor(io.imread(images_folder_path + "/" + fake_image_paths[i]), cv2.COLOR_RGB2GRAY))
+        mask_image = np.array(cv2.cvtColor(io.imread(images_folder_path + "/" + mask_image_paths[i]), cv2.COLOR_RGB2GRAY))
 
         # Calculate SSIM, round it, and add to array
         scores_ssim.append(round(structural_similarity(a_image, b_image, win_size=255), 3))

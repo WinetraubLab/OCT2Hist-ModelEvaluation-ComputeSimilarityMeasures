@@ -65,9 +65,9 @@ def calculateMetricArrays(real_image_paths, fake_image_paths, mask_image_paths, 
             a_image = a_image[np.any(mask_image != 0, axis=1)]
             b_image = b_image[np.any(mask_image != 0, axis=1)]
 
-            window_size = np.shape(a_image)[0]
-            if window_size % 2 == 0:
-                window_size -= 1
+        window_size = np.shape(a_image)[0]
+        if window_size % 2 == 0:
+            window_size -= 1
 
         # Calculate SSIM, round it, and add to array
         scores_ssim.append(round(structural_similarity(a_image, b_image, win_size=window_size), 3))

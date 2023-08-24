@@ -4,15 +4,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 from skimage import color
+import sys
+sys.path.insert(1, 'C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/segment-anything')
 
 import os
 import shutil
 
-images_path = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Aidan images/"
-destination = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Pix2Pix Dataset2/"
+# Inputs
+images_path = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Paulo images/"
+
+# Outputs the original image and its mask into the same folder
+destination = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Pix2Pix Dataset/256x256/"
+
+# SAM details' paths
 model_path = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/sam_vit_h_4b8939.pth"
 model_type = "vit_h"
 
+# Variables for mask selection
 bright_mask = None
 max_mean_mask = None
 max_mean = None
@@ -97,7 +105,7 @@ for i, image in enumerate(os.listdir(images_path)):
 
     else:
         print(f"Image {i}, {image} mask was not created")
-        print("\n")
+        print("/n")
         continue
 
 
@@ -112,10 +120,14 @@ for i, image in enumerate(os.listdir(images_path)):
 
         shutil.copy(images_path + image, destination)
 
-        plt.figure(figsize=(13.30, 6.65))
+        # If img size is 256x256, figsize=(3.33, 3.33),
+        # If 1024x512, figsize=(13.30, 6.65)
+        plt.figure(figsize=(3.33, 3.33))
         plt.imshow(masks[tissue_mask]["segmentation"], cmap='hot')
         plt.axis('off')
-        plt.savefig(destination + image[:35] + " Mask.png", format='png', bbox_inches='tight', pad_inches=0)
+
+        # Saves mask as [Image label] + "_mask.png"; needs that _mask for comparison
+        plt.savefig(destination + image[:35] + "_mask.png", format='png', bbox_inches='tight', pad_inches=0)
 
         print(f"Image {i}, {image} mask created")
-        print("\n")
+        print("/n")

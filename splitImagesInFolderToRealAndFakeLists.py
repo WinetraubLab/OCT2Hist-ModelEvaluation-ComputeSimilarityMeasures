@@ -56,6 +56,8 @@ def splitImagesInFolderToRealAndFakeLists(images_folder_path):
     for i in range(len(real_image_paths)):
         underscore = find_nth(real_image_paths[i], "_", 4)
         if len(mask_image_paths) != 0:
+            print(real_image_paths[i][:underscore - 1])
+            print(fake_image_paths[i][:underscore - 1])
             if real_image_paths[i][:underscore - 1] == fake_image_paths[i][:underscore - 1] == mask_image_paths[i][:underscore - 1]:
                 continue
             else:

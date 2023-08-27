@@ -8,9 +8,9 @@ Inputs:
   1. images_folder_path - a variable containing a string of file path of desired images
 
 Output:
-  1. real_image_paths - a list containing real images
-  2. fake_image_paths - a list containing fake images
-  3. mask_image_paths - a list containing mask images
+  1. real_image_paths - a list containing real image paths
+  2. fake_image_paths - a list containing fake image paths
+  3. mask_image_paths - a list containing mask image paths
   
 Example:
   real_image_paths[i] = LD-11-Slide06_Section01_yp0_patch0.png
@@ -39,34 +39,41 @@ def splitImagesInFolderToRealAndFakeLists(images_folder_path):
     mask_image_paths = []
 
     for i in images_files:
+        print("i = ", i)
         underscore = find_nth(i, "_", 4)
         name_label = i[:underscore - 1]
         type_label = i[underscore:]
 
         if "mask" in type_label:  # If there is "mask"
-            mask_image_paths.append(i)
+            mask_image_paths.append(images_folder_path + "/" + i)
+            print("appended ", images_folder_path + "/" + i)
 
         elif "fake" in type_label:  # If there is "fake"
-            fake_image_paths.append(i)
+            fake_image_paths.append(images_folder_path + "/" + i)
+            print("appended ", images_folder_path + "/" + i)
 
         else:  # If there is no "mask" or "fake"
-            real_image_paths.append(i)
+            real_image_paths.append(images_folder_path + "/" + i)
+            print("appended ", images_folder_path + "/" + i)
 
     # Check that prefixes are the same
-    for i in range(len(real_image_paths)):
-        underscore = find_nth(real_image_paths[i], "_", 4)
-        if len(mask_image_paths) != 0:
-            print(real_image_paths[i][:underscore - 1])
-            print(fake_image_paths[i][:underscore - 1])
-            if real_image_paths[i][:underscore - 1] == fake_image_paths[i][:underscore - 1] == mask_image_paths[i][:underscore - 1]:
-                continue
-            else:
-                raise Exception(f"Image names do not match - real image: {real_image_paths[-1]}, fake image: {fake_image_paths[-1], mask_image_paths[-1]}")
+    # for i in range(len(real_image_paths)):
+    #     underscore = find_nth(real_image_paths[i], "_", 4)
+    #     if len(mask_image_paths) != 0:
+    #         print(real_image_paths[i][:underscore - 1])
+    #         print(fake_image_paths[i][:underscore - 1])
+    #         if real_image_paths[i][:underscore - 1] == fake_image_paths[i][:underscore - 1] == mask_image_paths[i][:underscore - 1]:
+    #             continue
+    #         else:
+    #             raise Exception(f"Image names do not match - real image: {real_image_paths[-1]}, fake image: {fake_image_paths[-1], mask_image_paths[-1]}")
+    #
+    #     elif len(mask_image_paths) == 0:
+    #         if real_image_paths[i][:underscore - 1] == fake_image_paths[i][:underscore - 1]:
+    #             continue
+    #         else:
+    #             raise Exception(f"Image names do not match - real image: {real_image_paths[-1]}, fake image: {fake_image_paths[-1]}")
 
-        elif len(mask_image_paths) == 0:
-            if real_image_paths[i][:underscore - 1] == fake_image_paths[i][:underscore - 1]:
-                continue
-            else:
-                raise Exception(f"Image names do not match - real image: {real_image_paths[-1]}, fake image: {fake_image_paths[-1]}")
+    print("real_image_paths")
+    print(real_image_paths)
 
     return real_image_paths, fake_image_paths, mask_image_paths

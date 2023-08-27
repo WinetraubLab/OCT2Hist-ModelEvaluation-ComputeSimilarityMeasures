@@ -15,12 +15,11 @@ np.set_printoptions(threshold=sys.maxsize)
 This function takes lists of images, calculates their metric scores and puts them and their results into a csv file and returns vectors of each metric score
 
 Inputs:
-  1. real_image_paths - a list containing real images
-  2. fake_image_paths - a list containing fake images
-  3. mask_image_paths - a list containing mask images
-  4. images_folder_path - a variable containing a string of file path of desired images
-  5. outputFilePath - the desired path for the csv file to be saved in
-  6. outputFileName - the desired name for the csv file containing image pair names and their metric scores, where no name defaults to file name 'output.csv'
+  1. real_image_paths - a list containing real image paths
+  2. fake_image_paths - a list containing fake image paths
+  3. mask_image_paths - a list containing mask images paths
+  4. outputFilePath - the desired path for the csv file to be saved in
+  5. outputFileName - the desired name for the csv file containing image pair names and their metric scores, where no name defaults to file name 'output.csv'
 
 Outputs:
   1. scores_ssim - array of SSIM scores
@@ -41,7 +40,7 @@ Outputs:
 '''
 
 
-def calculateMetricArrays(real_image_paths, fake_image_paths, mask_image_paths, images_folder_path, outputFilePath='/content/drive/output.csv'):
+def calculateMetricArrays(real_image_paths, fake_image_paths, mask_image_paths, outputFilePath='/content/drive/output.csv'):
     # Metric score lists
     scores_ssim = []
     scores_mse = []
@@ -53,12 +52,12 @@ def calculateMetricArrays(real_image_paths, fake_image_paths, mask_image_paths, 
     # puts score into array, and prints all the pairs' file names and metric scores into a csv file
     for i in range(len(real_image_paths)):
         # Convert current A and B images to grayscale
-        a_image = np.array(cv2.cvtColor(io.imread(images_folder_path + "/" + real_image_paths[i]), cv2.COLOR_RGB2GRAY))
-        b_image = np.array(cv2.cvtColor(io.imread(images_folder_path + "/" + fake_image_paths[i]), cv2.COLOR_RGB2GRAY))
+        a_image = np.array(cv2.cvtColor(io.imread(real_image_paths[i]), cv2.COLOR_RGB2GRAY))
+        b_image = np.array(cv2.cvtColor(io.imread(fake_image_paths[i]), cv2.COLOR_RGB2GRAY))
 
         if len(mask_image_paths) != 0:
             # Converts mask into binary values
-            mask_image = np.array(cv2.imread(images_folder_path + "/" + mask_image_paths[i], cv2.IMREAD_GRAYSCALE))
+            mask_image = np.array(cv2.imread(mask_image_paths[i], cv2.IMREAD_GRAYSCALE))
             mask_image = cv2.threshold(mask_image, 128, 256, cv2.THRESH_BINARY)[1]
 
             # Isolates the section of the images as delineated by the mask

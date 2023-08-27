@@ -17,12 +17,12 @@ output_csv_file_path = 'C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEva
 
 real_list, fake_list, mask_list = splitImagesInFolderToRealAndFakeLists(images_folder)
 
-ssim, mse, psnr, mae, pcc = calculateMetricArrays(real_list, fake_list, mask_list, images_folder, output_csv_file_path)
+ssim, mse, psnr, mae, pcc = calculateMetricArrays(real_list, fake_list, mask_list, output_csv_file_path)
 
 printMetricAverages(ssim, mse, psnr, mae, pcc)
 
 top = pickTopScoringImagePairs(ssim, mse, psnr, mae, pcc, number)
-printTopScoringImagePairs(ssim, mse, psnr, mae, pcc, top, images_folder, real_list, fake_list, number)
+printTopScoringImagePairs(ssim, mse, psnr, mae, pcc, top, real_list, fake_list, number)
 
 low = pickLowestScoringImagePairs(ssim, mse, psnr, mae, pcc, number)
-printLowestScoringImagePairs(ssim, mse, psnr, mae, pcc, low, images_folder, real_list, fake_list, number)
+printLowestScoringImagePairs(ssim, mse, psnr, mae, pcc, low, real_list, fake_list, number)

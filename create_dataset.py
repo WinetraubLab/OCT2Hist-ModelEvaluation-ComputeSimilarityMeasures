@@ -5,26 +5,31 @@ import matplotlib.pyplot as plt
 import cv2
 from skimage import color
 import sys
-sys.path.insert(1, 'C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/segment-anything')
-
 import os
 import shutil
 
 # Inputs
-images_path = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Paulo images/"
+# Source folder of images to create masks from; has to be an existent folder, and string has to end with a '/'
+images_path = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Yonatan Dataset/tiff_images/"
 
-# Outputs the original image and its mask into the same folder
-destination = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Pix2Pix Dataset/256x256/"
+# Destination folder for the original image and its mask; has to be an existent folder, and string has to end with a '/'
+destination = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Yonatan Dataset/successes/"
 
-# SAM details' paths
-model_path = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/sam_vit_h_4b8939.pth"
+# Path containing the downloaded segment-anything GitHub project; must be downloaded
+sys.path.insert(1, 'C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/segment-anything')
+
+# Name of the model type
 model_type = "vit_h"
 
-# Variables for mask selection
+# Path where the model type is located; must be downloaded, can be located anywhere
+model_path = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/sam_vit_h_4b8939.pth"
+
+# Variables for mask selection and creation
 bright_mask = None
 max_mean_mask = None
 max_mean = None
 tissue_mask = None
+image_size = None
 
 # Shows an image's mask overlaid on the original image
 def show_ann(ann):
@@ -48,6 +53,15 @@ def show_points(coords, labels, ax, marker_size=375):
                linewidth=1.25)
     ax.scatter(neg_points[:, 0], neg_points[:, 1], color='red', marker='*', s=marker_size, edgecolor='white',
                linewidth=1.25)
+
+# Handles the outputted mask's size based on the given image
+# Constant 77 was derived from testing Matplotlib's outputs
+def calculate_size(img_size):
+    mask_size = list(img_size)
+    mask_size[0] = round(img_size[1] / 77, 2)
+    mask_size[1] = round(img_size[0] / 77, 2)
+    mask_size = tuple(mask_size)
+    return mask_size
 
 
 for i, image in enumerate(os.listdir(images_path)):
@@ -113,16 +127,18 @@ for i, image in enumerate(os.listdir(images_path)):
 
     if bright_mask != max_mean_mask:
         print(f"Image {i}, {image} mask was not created")
-        print("\n")
+        print("/n")
 
     elif bright_mask == max_mean_mask:
         tissue_mask = bright_mask
+
+        image_size = np.shape(img_array)
 
         shutil.copy(images_path + image, destination)
 
         # If img size is 256x256, figsize=(3.33, 3.33),
         # If 1024x512, figsize=(13.30, 6.65)
-        plt.figure(figsize=(3.33, 3.33))
+        plt.figure(figsize=calculate_size(image_size))
         plt.imshow(masks[tissue_mask]["segmentation"], cmap='hot')
         plt.axis('off')
 

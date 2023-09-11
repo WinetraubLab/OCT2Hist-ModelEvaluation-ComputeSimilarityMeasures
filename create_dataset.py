@@ -10,10 +10,10 @@ import shutil
 
 # Inputs
 # Source folder of images to create masks from; has to be an existent folder, and string has to end with a '/'
-images_path = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Yonatan Dataset/tiff_images/"
+images_path = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Mega Dataset/256x256/"
 
 # Destination folder for the original image and its mask; has to be an existent folder, and string has to end with a '/'
-destination = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Yonatan Dataset/successes/"
+destination = "C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Mega Dataset/256x256 masks/"
 
 # Path containing the downloaded segment-anything GitHub project; must be downloaded
 sys.path.insert(1, 'C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/segment-anything')
@@ -125,25 +125,45 @@ for i, image in enumerate(os.listdir(images_path)):
 
     # Checker to make sure the mask with highest pixel brightness mean and brightest pixel are the same
 
-    if bright_mask != max_mean_mask:
-        print(f"Image {i}, {image} mask was not created")
-        print("/n")
+    # if bright_mask != max_mean_mask:
+    #     print(f"Image {i}, {image} mask was not created")
+    #     print("/n")
+    #
+    # elif bright_mask == max_mean_mask:
+    #     tissue_mask = bright_mask
+    #
+    #     image_size = np.shape(img_array)
+    #
+    #     shutil.copy(images_path + image, destination)
+    #
+    #     # If img size is 256x256, figsize=(3.33, 3.33),
+    #     # If 1024x512, figsize=(13.30, 6.65)
+    #     plt.figure(figsize=calculate_size(image_size))
+    #     plt.imshow(masks[tissue_mask]["segmentation"], cmap='hot')
+    #     plt.axis('off')
+    #
+    #     # Saves mask as [Image label] + "_mask.png"; needs that _mask for comparison
+    #     plt.savefig(destination + image[:35] + "_mask.png", format='png', bbox_inches='tight', pad_inches=0)
+    #
+    #     print(f"Image {i}, {image} mask created")
+    #     print("/n")
 
-    elif bright_mask == max_mean_mask:
-        tissue_mask = bright_mask
+    tissue_mask = bright_mask
 
-        image_size = np.shape(img_array)
+    image_size = np.shape(img_array)
 
-        shutil.copy(images_path + image, destination)
+    shutil.copy(images_path + image, destination)
 
-        # If img size is 256x256, figsize=(3.33, 3.33),
-        # If 1024x512, figsize=(13.30, 6.65)
-        plt.figure(figsize=calculate_size(image_size))
-        plt.imshow(masks[tissue_mask]["segmentation"], cmap='hot')
-        plt.axis('off')
+    # If img size is 256x256, figsize=(3.33, 3.33),
+    # If 1024x512, figsize=(13.30, 6.65)
+    plt.figure(figsize=calculate_size(image_size))
+    plt.imshow(masks[tissue_mask]["segmentation"], cmap='hot')
+    plt.axis('off')
 
-        # Saves mask as [Image label] + "_mask.png"; needs that _mask for comparison
-        plt.savefig(destination + image[:35] + "_mask.png", format='png', bbox_inches='tight', pad_inches=0)
+    # Saves mask as [Image label] + "_mask.png"; needs that _mask for comparison
+    plt.savefig(destination + image[:35] + "_mask.png", format='png', bbox_inches='tight', pad_inches=0)
 
-        print(f"Image {i}, {image} mask created")
-        print("/n")
+    print(f"Image {i}, {image} mask created")
+    print("/n")
+
+    plt.close()

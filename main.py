@@ -7,13 +7,13 @@ from pickLowestScoringImagePairs import pickLowestScoringImagePairs
 from printLowestScoringImagePairs import printLowestScoringImagePairs
 
 # Input file path of images
-images_folder = 'C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Pix2Pix Dataset/256x256'
+images_folder = 'C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Paulo CycleGAN'
 
 # Select how many paired images and their scores to present (best and worst scores)
 number = 1
 
 # Output CSV file path where the scores of each image will be saved to and name of CSV file
-output_csv_file_path = 'C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Pix2Pix Dataset/results/output 2023-8-23.csv'
+output_csv_file_path = 'C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Paulo CycleGAN/output 2023-8-29.csv'
 
 real_list, fake_list, mask_list = splitImagesInFolderToRealAndFakeLists(images_folder)
 

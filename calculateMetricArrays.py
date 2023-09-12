@@ -83,6 +83,9 @@ def calculateMetricArrays(real_image_paths, fake_image_paths, mask_image_paths, 
         # Calculate PCC, round it, and add to array
         scores_pcc.append(round(pearsonr(a_image.flatten(), b_image.flatten())[0], 3))
 
+    def average(score_list):
+        return sum(score_list) / len(score_list)
+
     # Create csv file, add category row, and value rows
     with open(outputFilePath, mode='w', newline='') as csvfile:
         metrics_csvwriter = csv.writer(csvfile)
@@ -92,5 +95,10 @@ def calculateMetricArrays(real_image_paths, fake_image_paths, mask_image_paths, 
             metrics_csvwriter.writerow(
                 [real_image_paths[i], fake_image_paths[i], scores_ssim[i], scores_mse[i], scores_psnr[i],
                  scores_mae[i], scores_pcc[i]])
+
+        metrics_csvwriter.writerow(
+            ["Averages", "", f"{round(average(scores_ssim), 3)}", f"{round(average(scores_mse), 3)}",
+                             f"{round(average(scores_psnr), 3)}", f"{round(average(scores_mae), 3)}",
+                             f"{round(average(scores_pcc), 3)}"])
 
     return scores_ssim, scores_mse, scores_psnr, scores_mae, scores_pcc

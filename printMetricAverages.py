@@ -15,13 +15,7 @@ Output: Prints score averages onto screen, rounded to three significant figures
 def printMetricAverages(ssim, mse, psnr, mae, pcc):
     # Averages the scores for a given list
     def average(score_list):
-        avgVar = 0
-        for i in score_list:
-            avgVar += i
-
-        avgVar /= len(score_list)
-
-        return avgVar
+        return sum(score_list) / len(score_list)
 
     # Print metric averages
     print("Average scores:")

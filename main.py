@@ -13,7 +13,7 @@ images_folder = 'C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation
 number = 1
 
 # Output CSV file path where the scores of each image will be saved to and name of CSV file
-output_csv_file_path = 'C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Paulo CycleGAN/output 2023-8-29.csv'
+output_csv_file_path = 'C:/Users/pato_/Documents/Code Projects/OCT2Hist-ModelEvaluation-ComputeSimilarityMeasures/images/Paulo CycleGAN/output 2023-9-11.csv'
 
 real_list, fake_list, mask_list = splitImagesInFolderToRealAndFakeLists(images_folder)
 

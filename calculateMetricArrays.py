@@ -17,7 +17,7 @@ This function takes lists of images, calculates their metric scores and puts the
 Inputs:
   1. real_image_paths - a list containing real image paths
   2. fake_image_paths - a list containing fake image paths
-  3. mask_image_paths - a list containing mask images paths
+  3. mask_image_paths - a list containing mask images paths, leave empty to ignore mask
   4. outputFilePath - the desired path for the csv file to be saved in
   5. outputFileName - the desired name for the csv file containing image pair names and their metric scores, where no name defaults to file name 'output.csv'
 
@@ -40,7 +40,7 @@ Outputs:
 '''
 
 
-def calculateMetricArrays(real_image_paths, fake_image_paths, mask_image_paths, outputFilePath='/content/drive/output.csv'):
+def calculateMetricArrays(real_image_paths, fake_image_paths, mask_image_paths=[], outputFilePath='/content/drive/output.csv'):
     # Metric score lists
     scores_ssim = []
     scores_mse = []
